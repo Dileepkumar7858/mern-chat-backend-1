@@ -14,7 +14,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server, {
   cors: {
-    origin: ["http://localhost:5173", "https://sparkly-twilight-1da62f.netlify.app"],
+    origin: ["http://localhost:5173", "https://fantastic-flan-43eb41.netlify.app"],
     methods: ["GET", "POST"],
     credentials: true,
   },
