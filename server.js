@@ -12,15 +12,31 @@ dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
+// const io = socketio(server, {
+//   cors: {
+//     origin: ["http://localhost:5173", "https://masync-chat-app.netlify.app"],
+//     methods: ["GET", "POST"],
+//     credentials: true,
+//   },
+// });
 const io = socketio(server, {
   cors: {
-    origin: ["http://localhost:5173", "https://masync-chat-app.netlify.app"],
+    origin: ["http://localhost:5173", "https://masync-chat-app.netlify.app", "https://graceful-rabanadas-d7913e.netlify.app"],
     methods: ["GET", "POST"],
     credentials: true,
   },
 });
+
 //middlewares
-app.use(cors());
+// app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "https://masync-chat-app.netlify.app", "https://graceful-rabanadas-d7913e.netlify.app"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 //connect to db
 mongoose
