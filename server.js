@@ -14,14 +14,14 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server, {
   cors: {
-    origin: ["http://localhost:5173", "https://masync-chat-app.netlify.app"],
+    origin: ["http://localhost:5173", "https://sparkly-twilight-1da62f.netlify.app"],
     methods: ["GET", "POST"],
     credentials: true,
   },
 });
 //middlewares
-app.use(cors());
 app.use(express.json());
+app.use(cors());
 //connect to db
 mongoose
   .connect(process.env.MONGO_URL)
