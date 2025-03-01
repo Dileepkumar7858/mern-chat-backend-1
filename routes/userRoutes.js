@@ -31,35 +31,29 @@ const jwt = require("jsonwebtoken");
 // });
 
 userRouter.post("/register", async (req, res) => {
+  console.log("Received register request:", req.body); // Debugging
+
   try {
     const { username, email, password } = req.body;
 
-    // Check if any field is missing
     if (!username || !email || !password) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
-    // Check if user already exists
     const userExists = await User.findOne({ email });
     if (userExists) {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    // Create the new user
     const user = await User.create({ username, email, password });
 
-    // Send response
-    if (user) {
-      res.status(201).json({
-        _id: user._id,
-        username: user.username,
-        email: user.email,
-      });
-    }
+    res.status(201).json({ _id: user._id, username: user.username, email: user.email });
   } catch (error) {
+    console.error("Registration Error:", error.message);
     res.status(400).json({ message: error.message });
   }
 });
+
 
 
 //Login
